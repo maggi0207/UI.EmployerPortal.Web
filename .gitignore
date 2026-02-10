@@ -1,0 +1,31 @@
+## .NET / Blazor gitignore
+
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+.vs/
+*.rsuser
+
+# Visual Studio settings
+.vscode/
+*.launch
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Logs
+*.log
+*.trace
+
+# OS files
+.DS_Store
+Thumbs.db

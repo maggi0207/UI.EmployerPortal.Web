@@ -1,0 +1,171 @@
+.bi-page {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-family: Verdana, sans-serif;
+    width: 748px; /* 684px form + 32px padding each side */
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.bi-page__title {
+    font-family: Verdana, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 37.12px;
+    color: #000000;
+    margin: 0;
+}
+
+.bi-page__subtitle {
+    font-family: Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25.6px;
+    color: #000000;
+    margin: 0;
+}
+
+/* Section header */
+.bi-section-header {
+    width: 684px;
+    border-bottom: 1px solid #003663;
+    padding-bottom: 6px;
+}
+
+.bi-section-header span {
+    font-family: Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28.8px;
+    color: #003663;
+}
+
+/* Form */
+.bi-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* 2-column grid — exactly 330px per column, 24px gap = 684px */
+.bi-form__fields-grid {
+    display: grid;
+    grid-template-columns: 330px 330px;
+    gap: 24px;
+    width: 684px;
+}
+
+/* Zip + Extension row */
+.bi-form__zip-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    grid-column: span 1;
+}
+
+.bi-form__zip-row .text-field-wrapper:first-child {
+    flex: 0 0 140px;
+}
+
+.bi-form__zip-row .text-field-wrapper:last-child {
+    flex: 1;
+}
+
+.bi-form__zip-dash {
+    font-family: Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #424242;
+    flex-shrink: 0;
+    padding-top: 16px; /* vertically center with input */
+}
+
+/* Add another location link */
+.btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-family: Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0D6EFD;
+    border-radius: 6px;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+/* Button row */
+.bi-form__button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding-top: 8px;
+    width: 684px;
+}
+
+.bi-form__button-row-left {
+    display: flex;
+    align-items: center;
+}
+
+.bi-form__button-row-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-family: Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 25.6px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+}
+
+.btn--primary {
+    background: #003663;
+    color: #ffffff;
+    outline: 2px solid #003663;
+}
+
+.btn--primary:hover {
+    background: #002a4d;
+}
+
+.btn--secondary {
+    background: #ffffff;
+    color: #003663;
+    outline: 2px solid #003663;
+    outline-offset: -2px;
+}
+
+.btn--secondary:hover {
+    background: #f0f4f8;
+}
+
+.btn--tertiary {
+    background: transparent;
+    color: #003663;
+    outline: none;
+}
+
+.btn--tertiary:hover {
+    text-decoration: underline;
+}

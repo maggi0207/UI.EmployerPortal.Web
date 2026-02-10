@@ -1,0 +1,159 @@
+@page "/business-information"
+@rendermode InteractiveServer
+
+<div class="bi-page">
+
+    <h1 class="bi-page__title">Business Information</h1>
+    <p class="bi-page__subtitle">All fields are required unless noted</p>
+
+    <form class="bi-form">
+
+        @* Section 1: Business Information *@
+        <div class="bi-form__fields-grid">
+            <TextField Label="FEIN"
+                       @bind-Value="Model.FEIN"
+                       HasError="@HasFieldError(nameof(Model.FEIN))"
+                       ErrorMessage="FEIN is required." />
+
+            <TextField Label="Legal Name"
+                       @bind-Value="Model.LegalName"
+                       HasError="@HasFieldError(nameof(Model.LegalName))"
+                       ErrorMessage="Legal Name is required." />
+
+            <TextField Label="Trade Name (Optional)"
+                       @bind-Value="Model.TradeName" />
+
+            <TextField Label="Phone Number"
+                       @bind-Value="Model.PhoneNumber"
+                       Type="tel"
+                       HasError="@HasFieldError(nameof(Model.PhoneNumber))"
+                       ErrorMessage="Phone Number is required." />
+
+            <TextField Label="Email Address"
+                       @bind-Value="Model.Email"
+                       Type="email"
+                       HasError="@HasFieldError(nameof(Model.Email))"
+                       ErrorMessage="Email Address is required." />
+        </div>
+
+        @* Section 2: Business Mailing Address *@
+        <div class="bi-section-header">
+            <span>Business Mailing Address</span>
+        </div>
+
+        <div class="bi-form__fields-grid">
+            <SelectField Label="Country"
+                         @bind-Value="Model.MailingCountry"
+                         Options="Countries"
+                         HasError="@HasFieldError(nameof(Model.MailingCountry))"
+                         ErrorMessage="Country is required." />
+
+            <div></div>
+
+            <TextField Label="Address Line 1"
+                       @bind-Value="Model.MailingAddressLine1"
+                       HasError="@HasFieldError(nameof(Model.MailingAddressLine1))"
+                       ErrorMessage="Address Line 1 is required." />
+
+            <TextField Label="Address Line 2 (Optional)"
+                       @bind-Value="Model.MailingAddressLine2" />
+
+            <TextField Label="City"
+                       @bind-Value="Model.MailingCity"
+                       HasError="@HasFieldError(nameof(Model.MailingCity))"
+                       ErrorMessage="City is required." />
+
+            <SelectField Label="State"
+                         @bind-Value="Model.MailingState"
+                         Options="States"
+                         HasError="@HasFieldError(nameof(Model.MailingState))"
+                         ErrorMessage="State is required." />
+
+            <div class="bi-form__zip-row">
+                <TextField Label="Zip Code"
+                           @bind-Value="Model.MailingZip"
+                           HasError="@HasFieldError(nameof(Model.MailingZip))"
+                           ErrorMessage="Zip Code is required." />
+                <span class="bi-form__zip-dash">—</span>
+                <TextField Label="Ext. (Optional)"
+                           @bind-Value="Model.MailingExtension" />
+            </div>
+        </div>
+
+        @* Section 3: Physical Location 1 *@
+        <div class="bi-section-header">
+            <span>Physical Location 1</span>
+        </div>
+
+        <div class="bi-form__fields-grid">
+            <SelectField Label="Country"
+                         @bind-Value="Model.PhysicalCountry"
+                         Options="Countries"
+                         HasError="@HasFieldError(nameof(Model.PhysicalCountry))"
+                         ErrorMessage="Country is required." />
+
+            <div></div>
+
+            <TextField Label="Address Line 1"
+                       @bind-Value="Model.PhysicalAddressLine1"
+                       HasError="@HasFieldError(nameof(Model.PhysicalAddressLine1))"
+                       ErrorMessage="Address Line 1 is required." />
+
+            <TextField Label="Address Line 2 (Optional)"
+                       @bind-Value="Model.PhysicalAddressLine2" />
+
+            <TextField Label="City"
+                       @bind-Value="Model.PhysicalCity"
+                       HasError="@HasFieldError(nameof(Model.PhysicalCity))"
+                       ErrorMessage="City is required." />
+
+            <SelectField Label="State"
+                         @bind-Value="Model.PhysicalState"
+                         Options="States"
+                         HasError="@HasFieldError(nameof(Model.PhysicalState))"
+                         ErrorMessage="State is required." />
+
+            <div class="bi-form__zip-row">
+                <TextField Label="Zip Code"
+                           @bind-Value="Model.PhysicalZip"
+                           HasError="@HasFieldError(nameof(Model.PhysicalZip))"
+                           ErrorMessage="Zip Code is required." />
+                <span class="bi-form__zip-dash">—</span>
+                <TextField Label="Ext. (Optional)"
+                           @bind-Value="Model.PhysicalExtension" />
+            </div>
+        </div>
+
+        @* Add Another Physical Location *@
+        <button type="button" class="btn-link" @onclick="AddPhysicalLocation">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3V13M3 8H13" stroke="#0D6EFD" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            Add Another Physical Location
+        </button>
+
+        @* Action Buttons *@
+        <div class="bi-form__button-row">
+            <div class="bi-form__button-row-left">
+                <button type="button" class="btn btn--secondary" @onclick="HandleBack">
+                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none">
+                        <path d="M7 1L1 6.5L7 12" stroke="#003663" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    BACK
+                </button>
+            </div>
+            <div class="bi-form__button-row-right">
+                <button type="button" class="btn btn--tertiary" @onclick="HandleSaveQuit">
+                    SAVE &amp; QUIT
+                </button>
+                <button type="button" class="btn btn--primary" @onclick="HandleContinue">
+                    CONTINUE
+                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none">
+                        <path d="M1 1L7 6.5L1 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>

@@ -9,28 +9,52 @@ ASP.NET Core Blazor Web Application (.NET 8) for the Wisconsin Department of Wor
 - **Validation:** DataAnnotations + CustomValidator (for nested objects)
 - **CSS:** Scoped CSS isolation (`.razor.css` files), no CSS framework beyond base Bootstrap
 
-## Project Structure
+## Solution Structure
 ```
-UI.EmployerPortal.Web/
-├── Components/              # Root layout, shared components
-│   ├── Layout/             # MainLayout, NavMenu
-│   ├── Pages/              # Default Blazor pages (Home, Error)
-│   └── Shared/             # Shared UI components
-├── Features/               # Feature-based organization
-│   └── EmployerRegistration/
-│       ├── Components/     # Reusable field components
-│       │   ├── OutlinedTextField.razor
-│       │   ├── OutlinedSelectField.razor
-│       │   ├── AddressField.razor
-│       │   ├── PhoneNumberField.razor
-│       │   ├── FEINField.razor
-│       │   ├── FieldError.razor
-│       │   ├── CustomValidator.razor
-│       │   └── SelectOption.cs
-│       ├── Models/         # Data models with DataAnnotations
-│       └── *.razor         # Feature pages (wizard steps)
-└── wwwroot/                # Static assets
+d:\Mahi Source\
+├── UI.EmployerPortal.sln              # Solution file
+├── src/
+│   ├── Directory.Build.props          # Shared MSBuild properties
+│   ├── Directory.Build.targets        # Shared MSBuild targets
+│   ├── UI.EmployerPortal.Razor.SharedComponents/   # Shared Razor Class Library
+│   │   ├── Address/
+│   │   │   ├── AddressField.razor
+│   │   │   └── AddressField.razor.css
+│   │   ├── Inputs/
+│   │   │   ├── OutlinedTextField.razor (+css)
+│   │   │   ├── OutlinedSelectField.razor (+css)
+│   │   │   ├── PhoneNumberField.razor
+│   │   │   ├── FEINField.razor
+│   │   │   └── SelectOption.cs
+│   │   ├── Model/
+│   │   │   ├── AddressModel.cs
+│   │   │   └── BusinessInformationModel.cs
+│   │   ├── Accordion/
+│   │   │   ├── Accordion.razor
+│   │   │   └── Accordion.razor.css
+│   │   ├── Validation/
+│   │   │   ├── CustomValidator.razor
+│   │   │   ├── FieldError.razor
+│   │   │   └── FieldError.razor.css
+│   │   └── _Imports.razor
+│   └── UI.EmployerPortal.Web/         # Blazor Web App (startup project)
+│       ├── Components/                # Root layout
+│       │   ├── Layout/               # MainLayout, NavMenu
+│       │   └── Pages/                # Default Blazor pages (Home, Error)
+│       ├── Features/                  # Feature-based organization
+│       │   └── EmployerRegistration/
+│       │       └── *.razor           # Feature pages (wizard steps)
+│       └── wwwroot/                   # Static assets
 ```
+
+## Namespace Conventions
+- **Shared components:** `UI.EmployerPortal.Razor.SharedComponents.{Folder}`
+  - `UI.EmployerPortal.Razor.SharedComponents.Inputs` — OutlinedTextField, OutlinedSelectField, PhoneNumberField, FEINField, SelectOption
+  - `UI.EmployerPortal.Razor.SharedComponents.Address` — AddressField
+  - `UI.EmployerPortal.Razor.SharedComponents.Validation` — CustomValidator, FieldError
+  - `UI.EmployerPortal.Razor.SharedComponents.Model` — AddressModel, BusinessInformationModel
+  - `UI.EmployerPortal.Razor.SharedComponents.Accordion` — Accordion
+- **Web project:** `UI.EmployerPortal.Web.{Folder}`
 
 ## Code Conventions
 
@@ -79,8 +103,9 @@ Route pattern: `/employer-registration/{step-name}`
 
 ## Build & Run
 ```bash
-dotnet build
-dotnet run
+# From solution root (d:\Mahi Source\)
+dotnet build UI.EmployerPortal.sln
+dotnet run --project src/UI.EmployerPortal.Web
 ```
 Default URLs: https://localhost:7275, http://localhost:5259
 

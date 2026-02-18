@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Unicorn-repo/**)",
+      "Bash(git -C \"d:/Unicorn-repo\" status)",
+      "Bash(git -C \"d:/Unicorn-repo\" ls-files:*)",
+      "Bash(git -C \"d:/Unicorn-repo\" rm -rf .)",
+      "Bash(robocopy:*)",
+      "Bash(echo:*)",
+      "Bash(Write-Host \"Done\")",
+      "Bash(powershell -Command:*)",
+      "Bash(git -C \"d:/Unicorn-repo\" status --short)",
+      "Bash(powershell -NoProfile -Command:*)",
+      "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File \"d:\\\\Unicorn-repo\\\\copy_files.ps1\")",
+      "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File \"d:\\\\Unicorn-repo\\\\list_structure.ps1\")",
+      "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File \"d:\\\\Unicorn-repo\\\\sync_source.ps1\")"
+    ],
+    "additionalDirectories": [
+      "d:\\Unicorn-repo"
+    ]
+  }
+}

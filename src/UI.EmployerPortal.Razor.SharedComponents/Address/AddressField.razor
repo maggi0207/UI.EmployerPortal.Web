@@ -6,7 +6,7 @@
     <div class="bi-field">
         <OutlinedSelectField Label="Country"
                              @bind-Value="Address.Country"
-                             Options="Countries"
+                             Options="AddressModel.Countries"
                              For="() => Address.Country"
                              Visible="Visible" />
         <FieldError For="@(() => Address.Country)" Visible="Visible" />
@@ -38,7 +38,7 @@
     <div class="bi-field">
         <OutlinedSelectField Label="State"
                              @bind-Value="Address.State"
-                             Options="States"
+                             Options="AddressModel.States"
                              Placeholder="-- Select --"
                              For="() => Address.State"
                              Visible="Visible" />
@@ -64,7 +64,5 @@
 
 @code {
     [Parameter, EditorRequired] public AddressModel Address { get; set; } = default!;
-    [Parameter] public List<SelectOption> Countries { get; set; } = new();
-    [Parameter] public List<SelectOption> States { get; set; } = new();
     [Parameter] public bool Visible { get; set; }
 }

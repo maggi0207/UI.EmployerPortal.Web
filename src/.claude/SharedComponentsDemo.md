@@ -35,6 +35,29 @@ So you only need to add them if you're creating a page/component outside these l
 
 ---
 
+## Available Components Reference
+
+Here are all the input and validation components available in SharedComponents:
+
+| Component | Location | Purpose |
+|-----------|----------|---------|
+| **FEINField** | `Inputs/FEINField.razor` | FEIN input with auto-formatting (XX-XXXXXXX) |
+| **PhoneNumberField** | `Inputs/PhoneNumberField.razor` | Phone input with auto-formatting (XXX-XXX-XXXX) |
+| **OutlinedTextField** | `Inputs/OutlinedTextField.razor` | Generic text input (text, email, number, tel, etc.) |
+| **OutlinedSelectField** | `Inputs/OutlinedSelectField.razor` | Dropdown/select field |
+| **FieldError** | `Validation/FieldError.razor` | Error message display (pairs with input fields) |
+| **AddressField** | `Address/AddressField.razor` | Full address form (bundles all 7 address fields) |
+
+**Quick picking guide:**
+- Need FEIN input? → Use `FEINField`
+- Need phone input? → Use `PhoneNumberField`
+- Need generic text? → Use `OutlinedTextField`
+- Need dropdown? → Use `OutlinedSelectField`
+- Need a full address? → Use `AddressField` (which contains an `AddressModel`)
+- Need error message? → Pair any input with `FieldError`
+
+---
+
 ## What are these components?
 
 These are reusable input fields used across the Employer Registration form.
@@ -45,26 +68,36 @@ Instead of building a new input every time, you drop in one of these components.
 ## 1. FEIN Number Field
 
 **What it does**
-A text box where the user types their Federal Employer Identification Number.
-Shows a format hint below the box. Turns red if left empty on submit.
+A specialized text field for Federal Employer Identification Number.
+Automatically formats input as `XX-XXXXXXX` (2 digits, hyphen, 7 digits).
+Turns red if left empty on submit.
 
 **File**
-`Features/EmployerRegistration/Components/OutlinedTextField.razor`
+`Razor.SharedComponents/Inputs/FEINField.razor`
 
 **How to use it**
 ```razor
-<OutlinedTextField Label="FEIN"
-                   @bind-Value="Model.FEIN"
-                   For="() => Model.FEIN"
-                   FormatText="Format: XX-XXXXXXX"
-                   Visible="formSubmitted" />
+<FEINField @bind-Value="Model.FEIN"
+           For="() => Model.FEIN"
+           Visible="formSubmitted" />
 <FieldError For="@(() => Model.FEIN)" Visible="formSubmitted" />
 ```
+
+**Parameters**
+| Parameter | Type | Default | Purpose |
+|-----------|------|---------|---------|
+| `Value` | string? | | The FEIN value (2-digit-7-digit format) |
+| `ValueChanged` | EventCallback | | Fires when value changes |
+| `Label` | string | "FEIN" | Field label text |
+| `For` | Expression | | Validation expression |
+| `Visible` | bool | | Show/hide field |
+| `Disabled` | bool | false | Disable input |
 
 **Where the value is saved**
 `Features/Shared/Registrations/Models/BusinessInformationModel.cs`
 ```csharp
 [Required(ErrorMessage = "FEIN is required.")]
+[RegularExpression(@"^\d{2}-\d{7}$", ErrorMessage = "FEIN must be in format 99-9999999.")]
 public string? FEIN { get; set; }
 ```
 
@@ -73,28 +106,37 @@ public string? FEIN { get; set; }
 ## 2. Phone Number Field
 
 **What it does**
-A text box for a phone number. Opens the numeric keyboard on mobile devices.
-Turns red if left empty on submit.
+A specialized text field for phone numbers.
+Automatically formats input as `XXX-XXX-XXXX` as the user types.
+Opens numeric keyboard on mobile. Turns red if left empty on submit.
 
 **File**
-`Features/EmployerRegistration/Components/OutlinedTextField.razor`
-*(same component as FEIN — just add `Type="tel"`)*
+`Razor.SharedComponents/Inputs/PhoneNumberField.razor`
 
 **How to use it**
 ```razor
-<OutlinedTextField Label="Phone Number"
-                   Type="tel"
-                   @bind-Value="Model.PhoneNumber"
-                   For="() => Model.PhoneNumber"
-                   FormatText="Format: (XXX) XXX-XXXX"
-                   Visible="formSubmitted" />
+<PhoneNumberField @bind-Value="Model.PhoneNumber"
+                  For="() => Model.PhoneNumber"
+                  Visible="formSubmitted" />
 <FieldError For="@(() => Model.PhoneNumber)" Visible="formSubmitted" />
 ```
+
+**Parameters**
+| Parameter | Type | Default | Purpose |
+|-----------|------|---------|---------|
+| `Value` | string? | | The phone number (XXX-XXX-XXXX format) |
+| `ValueChanged` | EventCallback | | Fires when value changes |
+| `Label` | string | "Phone Number" | Field label text |
+| `For` | Expression | | Validation expression |
+| `Visible` | bool | | Show/hide field |
+| `Disabled` | bool | false | Disable input |
 
 **Where the value is saved**
 `Features/Shared/Registrations/Models/BusinessInformationModel.cs`
 ```csharp
 [Required(ErrorMessage = "Phone Number is required.")]
+[RegularExpression(@"^\d{3}-\d{3}-\d{4}$",
+    ErrorMessage = "Phone Number must be in format 999-999-9999.")]
 public string? PhoneNumber { get; set; }
 ```
 
@@ -103,25 +145,36 @@ public string? PhoneNumber { get; set; }
 ## 3. Select / Dropdown Field
 
 **What it does**
-A dropdown where the user picks one option from a list (e.g. State, Country).
-Turns red if nothing is selected on submit.
+A dropdown/select field where the user picks one option from a list (e.g. State, Country).
+Shows a custom arrow icon. Turns red if nothing is selected on submit.
 
-**Files**
-- Component: `Features/EmployerRegistration/Components/OutlinedSelectField.razor`
-- Option model: `Features/EmployerRegistration/Components/SelectOption.cs`
+**File**
+`Razor.SharedComponents/Inputs/OutlinedSelectField.razor`
 
 **How to use it**
 ```razor
 <OutlinedSelectField Label="State"
-                     @bind-Value="Model.MailingState"
+                     @bind-Value="Model.State"
                      Options="States"
                      Placeholder="Select a state"
-                     For="() => Model.MailingState"
+                     For="() => Model.State"
                      Visible="formSubmitted" />
-<FieldError For="@(() => Model.MailingState)" Visible="formSubmitted" />
+<FieldError For="@(() => Model.State)" Visible="formSubmitted" />
 ```
 
-The list of options is defined in the code-behind file:
+**Parameters**
+| Parameter | Type | Default | Purpose |
+|-----------|------|---------|---------|
+| `Value` | string? | | Selected option value |
+| `ValueChanged` | EventCallback | | Fires when selection changes |
+| `Label` | string? | | Field label text |
+| `Options` | List<SelectOption> | | List of available options |
+| `Placeholder` | string? | | Placeholder text shown in dropdown |
+| `For` | Expression | | Validation expression |
+| `Visible` | bool | | Show/hide field |
+| `Disabled` | bool | false | Disable dropdown |
+
+**Defining options in code-behind:**
 `Features/EmployerRegistration/BusinessInformation.razor.cs`
 ```csharp
 protected List<SelectOption> States { get; set; } = new()

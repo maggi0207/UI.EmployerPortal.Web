@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using System.ComponentModel.DataAnnotations
 @using UI.EmployerPortal.Razor.SharedComponents.Address
+@using UI.EmployerPortal.Razor.SharedComponents.Model
 @using UI.EmployerPortal.Razor.SharedComponents.Validation
 @using UI.EmployerPortal.Web.Features.Shared.Registrations.Models
 @using UI.EmployerPortal.Razor.SharedComponents.Inputs
@@ -92,8 +93,6 @@
                 </div>
 
                 <AddressField Address="Model.ContactAddress"
-                              Countries="Countries"
-                              States="States"
                               Visible="formSubmitted" />
             }
 
@@ -148,67 +147,6 @@
     private CustomValidator? customValidator;
     private bool formSubmitted = false;
     private bool hasValidationErrors = false;
-
-    protected List<SelectOption> Countries { get; set; } = new()
-    {
-        new() { Value = "United States", Text = "United States" },
-        new() { Value = "Canada", Text = "Canada" },
-        new() { Value = "Mexico", Text = "Mexico" }
-    };
-
-    protected List<SelectOption> States { get; set; } = new()
-    {
-        new() { Value = "AL", Text = "Alabama" },
-        new() { Value = "AK", Text = "Alaska" },
-        new() { Value = "AZ", Text = "Arizona" },
-        new() { Value = "AR", Text = "Arkansas" },
-        new() { Value = "CA", Text = "California" },
-        new() { Value = "CO", Text = "Colorado" },
-        new() { Value = "CT", Text = "Connecticut" },
-        new() { Value = "DE", Text = "Delaware" },
-        new() { Value = "FL", Text = "Florida" },
-        new() { Value = "GA", Text = "Georgia" },
-        new() { Value = "HI", Text = "Hawaii" },
-        new() { Value = "ID", Text = "Idaho" },
-        new() { Value = "IL", Text = "Illinois" },
-        new() { Value = "IN", Text = "Indiana" },
-        new() { Value = "IA", Text = "Iowa" },
-        new() { Value = "KS", Text = "Kansas" },
-        new() { Value = "KY", Text = "Kentucky" },
-        new() { Value = "LA", Text = "Louisiana" },
-        new() { Value = "ME", Text = "Maine" },
-        new() { Value = "MD", Text = "Maryland" },
-        new() { Value = "MA", Text = "Massachusetts" },
-        new() { Value = "MI", Text = "Michigan" },
-        new() { Value = "MN", Text = "Minnesota" },
-        new() { Value = "MS", Text = "Mississippi" },
-        new() { Value = "MO", Text = "Missouri" },
-        new() { Value = "MT", Text = "Montana" },
-        new() { Value = "NE", Text = "Nebraska" },
-        new() { Value = "NV", Text = "Nevada" },
-        new() { Value = "NH", Text = "New Hampshire" },
-        new() { Value = "NJ", Text = "New Jersey" },
-        new() { Value = "NM", Text = "New Mexico" },
-        new() { Value = "NY", Text = "New York" },
-        new() { Value = "NC", Text = "North Carolina" },
-        new() { Value = "ND", Text = "North Dakota" },
-        new() { Value = "OH", Text = "Ohio" },
-        new() { Value = "OK", Text = "Oklahoma" },
-        new() { Value = "OR", Text = "Oregon" },
-        new() { Value = "PA", Text = "Pennsylvania" },
-        new() { Value = "RI", Text = "Rhode Island" },
-        new() { Value = "SC", Text = "South Carolina" },
-        new() { Value = "SD", Text = "South Dakota" },
-        new() { Value = "TN", Text = "Tennessee" },
-        new() { Value = "TX", Text = "Texas" },
-        new() { Value = "UT", Text = "Utah" },
-        new() { Value = "VT", Text = "Vermont" },
-        new() { Value = "VA", Text = "Virginia" },
-        new() { Value = "WA", Text = "Washington" },
-        new() { Value = "WV", Text = "West Virginia" },
-        new() { Value = "WI", Text = "Wisconsin" },
-        new() { Value = "WY", Text = "Wyoming" }
-    };
 
     protected override void OnInitialized()
     {
